@@ -3,7 +3,14 @@
 %%% Mathematics Department of Northwestern University
 %%% 
 %%% Author: Miguel A. Lerma (mlerma@math.northwestern.edu)
-%%% Date: 5/21/2012
+%%% Date: 10/6/2014
+%%%
+%%% Bug reports to: mlerma@math.northwestern.edu
+%%%
+%%% If you modifiy this file state that it is modified, when and by whom,
+%%% and if possible also the details and motivations for the changes.
+%%% Also change the version information below to avoid confusion in
+%%% bug reports.
 %%%
 %%% ====================================================================
 %% \CharacterTable
@@ -23,16 +30,13 @@
 %%   Right brace   \}     Tilde         \~}
   \NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
 	 [1994/12/01]% LaTeX date must December 1994 or later
-  \ProvidesClass{nuthesis}[2012/05/21 v1.12a by Miguel A. Lerma]
+  \ProvidesClass{nuthesis}[2014/10/06 v1.15a by Miguel A. Lerma]
 		\PassOptionsToClass{oneside}{amsbook}
     \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsbook}}
 			\ProcessOptions\relax
 			 \LoadClass{amsbook}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\RequirePackage[bookmarks, bookmarksopen=true, plainpages=false, pdfpagelabels, letterpaper, pdfpagelayout=SinglePage, breaklinks = true]{hyperref} % contributed by Ezra Getzler - 3/15/2005
-
-% ``breaklinks = true'' option added - MAL 4/21/2009
 
 % contributed by Tomasz Strzalecki - 7/27/2008
 % there should be a page number on the page which displays the part name
@@ -51,6 +55,12 @@
 \RequirePackage{setspace}                        % MAL - 4/19/2003
 \renewcommand{\onehalfspacing}{\setstretch{1.4}} % MAL - 4/19/2003
 \renewcommand{\doublespacing}{\setstretch{1.8}}  % MAL - 4/19/2003
+
+
+% \RequirePackage[...]{hyperref} moved after\RequirePackage{setspace} per bug report by Jarvis Schultz, 8/8/2014
+\RequirePackage[bookmarks, bookmarksopen=true, plainpages=false, pdfpagelabels, letterpaper, pdfpagelayout=SinglePage, breaklinks = true]{hyperref} % contributed by Ezra Getzler - 3/15/2005
+
+% ``breaklinks = true'' option added - MAL 4/21/2009
 
 % Page numbering should be at normal size 
 % (amsbook.cls yields scriptsize) - MAL 6/17/2003
@@ -163,11 +173,17 @@
 %                #6 - font control
 % if tempskipa <= 0 the heading is a run-in heading
 
+%\def\section{\@startsection{section}{1}%
+%  \z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+%  {\normalfont\bfseries\centering}}
+%\def\subsection{\@startsection{subsection}{2}%
+%  \z@{-3.25ex\@plus -1ex \@minus -.2ex}{1.5ex \@plus .2ex}%
+%  {\normalfont\bfseries}}
 \def\section{\@startsection{section}{1}%
-  \z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+  \z@{.7\linespacing}{.5\linespacing}%
   {\normalfont\bfseries\centering}}
 \def\subsection{\@startsection{subsection}{2}%
-  \z@{-3.25ex\@plus -1ex \@minus -.2ex}{1.5ex \@plus .2ex}%
+  \z@{.5\linespacing}{.3\linespacing}%
   {\normalfont\bfseries}}
 \def\subsubsection{\@startsection{subsubsection}{3}%
   \z@\z@{-.5em}%
@@ -274,7 +290,7 @@ All Rights Reserved
 \begin{center}
 NORTHWESTERN UNIVERSITY\par
 \vfill
-{\Large \@title}\par
+{\large \@title}\par
 \vfill
 A DISSERTATION\par
 \vspace{0.5cm}
@@ -307,7 +323,7 @@ Author's name required\par
 \chapter*{\abstractname}
 \bigskip
 \begin{center}
-\Large \@title{}\par
+\@title{}\par
 \bigskip
 \authors{}\par
 \end{center}
@@ -349,7 +365,9 @@ Author's name required\par
 %\newcommand{\introduction}{\chapter*{\introductionname}}
 %\def\introductionname{Introduction} 
 
-\newcommand{\vita}{\clearpage\phantomsection\chapter*{\vitaname}}
+\newcommand{\vita}{\clearpage%
+\let\chaptername\relax% to avoid the word "appendix" appearing in the TOC (bug reported by Ben Suter, 10/6/2014)
+\phantomsection\chapter*{\vitaname}}
 \def\vitaname{Vita}
 
 % Taken from amsbook.cls and modified.
@@ -364,7 +382,7 @@ Author's name required\par
   \list{\@biblabel{\theenumiv}}{%
     \settowidth\itemsep\@mainsize      % MAL - 5/9/2001
 %    \singlespace                       % MAL - 5/9/2001
-    \begin{singlespace}
+%    \begin{singlespace} % removed MAL 3/31/2103 (bug reported by Martin Szydlowski)
     \settowidth\labelwidth{\@biblabel{#1}}%
     \leftmargin\labelwidth \advance\leftmargin\labelsep
     \usecounter{enumiv}}%
@@ -373,7 +391,7 @@ Author's name required\par
 }{%
   \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
 %  \endsinglespace                      % MAL - 5/9/2001
-    \end{singlespace}
+%    \end{singlespace} % removed MAL 3/31/2103  (bug reported by Martin Szydlowski)
   \endlist
 }
 \def\bibname{References}

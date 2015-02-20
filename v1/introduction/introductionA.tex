@@ -29,7 +29,7 @@ Electrokinetics phenomena are rich outside the context of nanopore-based DNA seq
 
 Another nonlinear electrokinetic effect known as Induced Charge Electroosmosis (ICEO) \cite{murtsovkin96,Squires2004} is related to an electric field acting on the its own induced charge adjacent to a polarizable object. ICEO is the mechanism for various electrokinetics phenomena in microfluidics such as electrokinetic jets at dielectric microchannel corners, hydrodynamic interaction between polarizable particles, and AC dielectrophoresis \cite{bazant2004induced,levitan2005experimental,basuray2007induced,bazant2009towards,schnitzer2012induced,schnitzer2014strong}. 
 
-\section{Problem Formulation}
+\section{Governing Equations}
 The current work focuses on electroosmotic flow under DC field in nanopores and nanochannels.  The working environment for electrokinetically-driven fluidic devices is an ionic solution. At small scales, surfaces charges, either intrinsic or induced by electric field, lead to accumulation of counter-ions within a layer of fluid near the surfaces, known as the electric double layer, or Debye layer. An external electric field is used to drive the non-electroneutrual fluid, while ion distributions are modified by the electric field and the electroosmotic flow at the same time. Electrostatics, transport of ion species and fluid flow are all coupled, making the problem a ``multiphysics'' problem.
 
 If steady state is assumed, the transport of the $i$th ionic species in electrolyte solution can be described by the Nernst-Planck equation \cite{landau1981course}
@@ -103,21 +103,29 @@ Equation \ref{eq:nernst-planck}, \ref{eq:poisson}, \ref{eq:stokes} and \ref{eq:c
 %\end{equation}
 %in which $u_{m}e E_0$ is the velocity an ion acquires under $E_0$, or the electrophoretic velocity. $c_0eR^2E_0/\mu$ also has a dimension of velocity and can be interpreted as the velocity the fluid acquires under $E_0$ because of the space charge density it carries, or the electroosmotic velocity (since $c_0 e R^3 E_0$ is the force exerted on a spherical fluid particle of radius $R$. Divided by $6\pi R \mu$ is the velocity of that particle, due to Stokes\'{} law). Thus $\xi$ is a ratio between the two velocities representing electrophoretic and electroosmotic effects. It could also be related to the electric Reynolds number $Re_E^{-1}$, defined as the ratio of the time scale of charge convection by flow to a charge relaxation time set by Ohmic conduction\cite{feng1999electrohydrodynamic}.
 
-\subsection{Classic Theories}
-Under certain conditions, the PNP-Stokes system of equations have analytical solutions. In the absence of external electric field (and hence absence of fluid flow, or $\mathbf{u}=0$), the solid substrate has an electric potential due to the surface charges, known as the $\zeta-$potential \cite{kirby2004zeta,kirby2004zeta2}. Assume a uniform potential $\zeta$, and the equilibrium electric potential distribution in the electrolyte solution is $\phi_0$. From Equation \ref{eq:nernst-planck} ionic concentration follows the Boltzmann distribution away from the electrolyte-substrate interface, or
+\subsection{Fundamental Concepts of Electrokinetics}
+Under certain conditions, the PNP-Stokes system of equations have analytical solutions. In the absence of external electric fields or fluid flow ($\mathbf{u}=0$) the concentration of ions is uniform; $n^i = n_\infty^i$ for the $i$ th species of ions. Since the bulk solution is charge neutral, clearly $\sum_{i} n_\infty^i z_i = 0$. However, if the substrate is charged, the concentrations $n^i$ are non-uniform and so is the distribution of potential $\phi_0$ in the electrolyte.  
+
+
+
+ the solid substrate has an electric potential due to the surface charges, known 
+as the $\zeta-$potential \cite{kirby2004zeta,kirby2004zeta2}. Assume a uniform potential $\zeta$, and the equilibrium electric potential distribution in the electrolyte solution is $\phi_0$. 
+
+
+The steady state solution of Equation \ref{eq:nernst-planck} under conditions of zero ionic current is the 
+Boltzmann distribution:
 \begin{equation}
 n^i = n_\infty^i \exp \left( -\frac{z_i e \phi_0}{k_BT} \right)
 \end{equation}
 Here $n_\infty^i$ is the bulk ionic concentration far from the charged surfaces, where $\phi_0=0$.
-
-If Boltzmann distribution is substituted into Equation \ref{eq:poisson}, Equation \ref{eq:poisson} becomes the Poisson-Boltzmann equation for electric potential $\phi_0$. 
-
+If the Boltzmann distribution is substituted into Equation \ref{eq:poisson}, we get the Poisson-Boltzmann equation for determining the electric potential $\phi_0$:
 \begin{equation}
-\epsilon \nabla^2\phi_0 = - e \left(\sum_i z_i n_\infty^i \exp \left( -\frac{z_i e \phi_0}{k_BT} \right) \right)
+\epsilon \nabla^2\phi_0 = -  \sum_i e z_i n_\infty^i \exp \left( -\frac{z_i e \phi_0}{k_BT} \right) 
 \label{eq:poisson-boltzmann}
 \end{equation}
 
-The description of the electric double layer using the above approach is known as the Gouy-Chapman model\cite{ghosal2006electrokinetic}. In the weak field limit, a.k.a. the Debye-H\''{u}ckel limit, or $|\zeta|\ll k_BT/e\approx 25$ mV, Poisson-Boltzmann equation can be linearized into the following equation. 
+The description of the electric double layer using the above approach is known as the Gouy-Chapman model\cite{ghosal2006electrokinetic}. 
+In the weak field limit, a.k.a. the Debye-H\''{u}ckel limit, or $|\zeta|\ll k_BT/e\approx 25$ mV, Poisson-Boltzmann equation can be linearized by using the approximation $\exp (x ) \approx 1 + x$ when $x$ is small and the condition of electroneutrality of the bulk solution. We then the Debye-H\''{u}ckel equation 
 \begin{equation}
 \epsilon \nabla^2\phi_0 = \frac{\sum_i z_i^2 e^2 n_\infty^i}{k_BT} \phi_0
 \end{equation}
@@ -129,21 +137,36 @@ where $\kappa^{-1}$ is known as the Debye length
 \begin{equation}
 \kappa^{-1}=\lambda_D=\left(\frac{\epsilon k_BT}{\sum_i e^2 z_i^2n_\infty^i}\right)^{1/2},
 \end{equation}
+Closed form analytical solutions for the linearized Poisson-Boltzmann equations are known in simple geometries e.g. when the equipotential surfaces are planar, spherical or cylindrical \cite{ghosal2006electrokinetic,ghosal2010mathematical}. 
 
-Analytical solutions exist for linearized Poisson-Boltzmann equations in front of an infinite half plane, between two parallel planes and in an infinite cylinder\cite{ghosal2006electrokinetic,ghosal2010mathematical}.
-
-In the presence of external fields and fluid flow the equilibrium Gouy-Chapman model is generally not applicable and one must proceed from the full electrokinetic equations presented earlier. However, if the external field and fluid velocity are both along the iso-surfaces of the charge density $\rho_e$ then the presence of the flow or the imposed field does not alter the charge density distribution which may still be obtained from the Gouy-Chapman model. The velocity of the electroosmotic flow can be solved as
+In the presence of external fields and fluid flow the equilibrium Gouy-Chapman model is generally no longer applicable and one must proceed from the full electrokinetic equations presented earlier. However, if the external field and fluid velocity are both along the iso-surfaces of the charge density $\rho_e$ then the presence of the flow or the imposed field does not alter the charge density distribution which may still be obtained from the Gouy-Chapman model. This is the case for example when an electric field is applied along the axis of a uniformly charged cylinder or if an electric field is applied parallel to a charged planar surface. It is also true in the case of a surface of arbitray shape but where the Debye layer is much thinner than the local radius of curvature (so that the geometry is essentially planar) and the electric field lines are parallel to the surface. 
+It then follows that the flow 
+velocity at any point is 
 \begin{equation}
-u = \frac{\epsilon E}{\mu}\left(\phi_0 - \zeta\right)
+\mathbf{u} = \frac{\epsilon \mathbf{E}}{\mu}\left(\phi_0 - \zeta\right)
 \label{eq:classicu}
 \end{equation}
-
-When the double layer is thin compared to the length scale of the system, $\phi_0$ is uniform in the bulk region of the electrolyte, except that it changes rapidly within the thin double layer. This is the case in microfluidic context, such as microfluidic channels, where the radius of the channel is around 10-100 $\mu$m, while the Debye length $\lambda_D$ is $\approx$ 1-10 nm. Hence from Equation \ref{eq:classicu}, the velocity is uniform in the bulk, and changes rapidly to 0 at the solid wall only within a small distance of $\lambda_D$. The velocity difference between the wall and the velocity at the same point right above the (infinitely thin) double layer is
+which expresses the flow field $\mathbf{u}$ in terms of the equilibrium potential $\phi_0$ and the applied field 
+$\mathbf{E}$. The quantity 
+$\zeta$ is the potential at the surface of the solid and is called the ``zeta'' potential\footnote{since the potential 
+changes very rapidly close to the surface the potential ``at'' the surface becomes somewhat ambiguous. Technically,
+the zeta potential is defined as the potential at the ``slip plane'': an imaginary 
+surface separating the ``Stern layer''  of adsorbed counterions from the ``diffuse layer'' of mobile ions.}
+When the double layer is thin compared to the characteristic geometric length scales of the system, $\phi_0$ is uniform in the bulk region of the electrolyte and changes rapidly within the thin double layer. This is the case for example in 
+microfluidic channels, where the radius of the channel is around 10-100 $\mu$m, while the Debye length $\lambda_D$ is 
+$\approx$ 1-10 nm. Hence, from Equation \ref{eq:classicu}, the velocity is uniform in the bulk, and drops rapidly to zero at the solid wall within a small distance of $\lambda_D$. The velocity difference between the wall and the velocity at the point right above the (infinitely thin) double layer is
 \begin{equation}
-\Delta u = -\frac{\epsilon E \zeta}{\mu}
+\Delta \mathbf{u} = -\frac{\epsilon \mathbf{E} \zeta}{\mu}
 \label{eq:HSslip}
 \end{equation}
-This is known as the ``Helmholtz-Smoluchowski'' slip velocity\cite{Helmholtz,Smoluchowski1924}. A formal asymptotic derivation of the result in terms of the small parameter $\lambda_D/a_0$ ($a_0$ being a characteristic length) is presented by Anderson\cite{anderson1985effect}. The ``slug'' like velocity profile in the bulk is the basis for many microfluidic applications, such as capillary electrophoresis\cite{ghosal2006electrokinetic}.
+This is known as the ``Helmholtz-Smoluchowski'' slip velocity\cite{Helmholtz,Smoluchowski1924}. A formal asymptotic derivation of the result in terms of the small parameter $\lambda_D/a_0$ ($a_0$ being a characteristic length) is presented by Anderson\cite{anderson1985effect}. The ``slug'' velocity profile in the bulk is the basis for many microfluidic applications, such as capillary electrophoresis\cite{ghosal2006electrokinetic} where a uniform flow is critical in order to avoid Taylor dispersion.
 
 \section{Thesis Outline}
-The current work focuses on electroosmotic flow in a nanopore system. In Chapter 2, an analytical solution is presented for electroosmotic flow through a zero-thickness nanopore under the weak field approximation. The reciprocal theorem is utilized to calculate the flow rate through the nanopore under an applied voltage bias. The flow rate can be presented in closed form as an integral for a circular nanopore, and the resulting integral is computed up to quadrature. In Chapter 3, the zero-thickness solution is patched with the solution of electroosmotic flow in a cylindrical tube. The formula for flow rate can be modified to account for nanopores at non-zero thicknesses. The effect of double layer needs to be considered and it is demonstrated that the solution needs to be modified when Debye layer is thick compared to the pore thickness. In Chapter 4, the system of an uncharged, finite-thickness nanopore is considered. The ICEO effects in such a system is studied both theoretically and numerically. The results show corner jets and vortical flow structures in the nanopore. In Chapter 5, the numerical methods of solving the PNP-Stokes system are introduced. Summary and conclusions are presented in Chapter 7. 
+The current work focuses on electroosmotic flow in a nanopore system. In Chapter 2, an analytical solution is presented for electroosmotic flow through a zero-thickness nanopore under the weak field approximation. The reciprocal theorem for Stokes flow is utilized to calculate the flow rate through the nanopore under an applied voltage bias. The flow rate can be presented in closed form as an integral for a circular nanopore, and the resulting integral is computed by quadrature. In Chapter 3, the zero-thickness solution is patched with the solution of electroosmotic flow in a cylindrical tube to yield a formula for the flow 
+through a nanopore in a membrane of finite thickness. Comparison with the full numerical solution of the PNP-Stokes 
+equation validates the theory except when the Debye layer is thick compared to the pore radius. It is then shown that 
+the discrepancy is due to a reduction in the ``effective charge'' of the pore as some of the counterion ions 
+from the pore ``spill'' outside the pore when the Debye length is long. When this effect is accounted for, the 
+agreement between theory and simulation is restored.
+In Chapter 4, the system of an uncharged finite-thickness nanopore is considered taking into account the effect 
+of a finite dielectric ratio between solid and liquid leading to an ICEO effect. The flow induced in this system under an applied electric field is studied both theoretically and numerically. The results show corner jets and vortical flow structures in the nanopore. In Chapter 5, numerical methods of solving the PNP-Stokes system are discussed. Summary and conclusions are presented in Chapter 7. 

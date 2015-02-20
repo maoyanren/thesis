@@ -18,13 +18,13 @@
 \documentclass[12pt]{nuthesis}	% The nuthesis class is based on 
 				% amsbook.cls.			
 \usepackage{graphicx}
+\usepackage{epstopdf}
 \usepackage{caption}
 \usepackage{epigraph}
 \usepackage{subcaption}
 \usepackage{amssymb,amsmath,amsbsy}
 \usepackage{multirow}
 \usepackage{subeqnarray}
-\usepackage{psfrag}
 \usepackage{color}
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \usepackage{listings}
@@ -62,19 +62,9 @@
 
 \field{Mechanical Engineering}            % Default: Mathematics
 
-\graduationmonth{December}         % The default is June or December
+\graduationmonth{March}         % The default is June or December
                                 % depending on current date.
-\graduationyear{2014}          % Default: current year.
-
-%\includeonly{}
-				% Use \includeonly to select the 
-				% chapters to include if you are 
-				% using the \include command below.
-				% This way you can latex only a the 
-				% part you are working on, which 
-				% is faster than latexing the entire 
-				% thesis. 
-
+\graduationyear{2015}          % Default: current year.
 
 \begin{document}
 %	
@@ -99,8 +89,17 @@ The strength and structure of the flow depends on several parameters including t
 Numerical solvers to solve the full governing system of equations are developed based on finite volume method. The solvers are able to compute the coupled electrostatics, ionic transport and Stokes flow equations. Numerical results agree with theoretical models in the corresponding parameter regimes. A finite element software package is also utilized to capture the multi--physics processes. The simulation tools are applied to study electroosmotic nanojet from a nanocapillary, and the results are compared with the experimental work at our collaborator\'{}s group.
 
 \acknowledgements	% Acknowledgements (optional).
+I would like to express my deepest gratitude to my advisor Prof. Sandip Ghosal. He has been a tremendous mentor for me during my years at Northwestern University. I have learned from him a great deal, not only about fluid mechanics, but also about commitment to scientific research. Working with him has always been a pleasant and rewarding experience. His support and advice on both research as well as my career has been invaluable. So with all my heart, thank you Professor, for everything!
 
-Text for acknowledgments.
+I would also like to thank Dr. John Sherwood from DAMTP at the University of Cambridge. The material presented in this dissertation would be impossible without his extremely important contributions. It was a great honor collaborating with a great mathematician like him. I also want to thank Dr. Guohui Hu from Shanghai University, who introduced the topic of nanopores to me in 2011. The research we did together on nanopores at the beginning of my PhD study pointed me in the right path.
+
+I would like to thank my committee members, Prof. Seth Lichter, Prof. Malcolm MacIver and Prof. Michael Miksis, for taking the time to review and comment on my thesis. I also want to thank Prof. Neelesh Patankar for helpful discussion on computational fluid dynamics, and Prof. Ulrich Keyser for hospitality during my visit to the Cavendish Laboratory at Cambridge.
+
+Most importantly, I would like to thank my dearest girl friend Anna, for being with me through this tough journey, for sharing all my happy and sad moments, and for loving and unconditionally supporting me during the past 3 years. I am also grateful to my family who encouraged and support me in pursuing my PhD studies.
+
+A special thanks to the guys in the fluids lab, Amneet, Namu, Paul, Rahul, Tayil, Tom, Walter and Zhen, and my good friends Hao, Hongyi, Jieqi, Shi, Shu and Wenchang.
+
+I have been extremely fortunate to have all the help and support I have had during the past 5 years. I am grateful to everyone who helped me along the road, and I wish I were able to name each one of them but this would take too long as there were many! 
 
 %\preface		% Preface (optional).
 %

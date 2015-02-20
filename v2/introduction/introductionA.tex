@@ -1,0 +1,191 @@
+\chapter{Introduction\label{chpt:intro}}
+\section{Motivation}
+\label{sec:intro-motiv}
+A nanopore is simply a hole of small size in an impermeable membrane separating two regions containing an electrolytic buffer. A size range of 1-100 nm is fairly typical. Living cells and intracellular organelles are usually bounded by lipid membranes containing nanopores constructed of membrane-bound proteins. The transport of small molecules and polymers across such nanopores is a very common feature in living cells and is essential to their normal function \cite{Alberts,Pfanner_90,Matouschek,Martin,Kunkele}. For example, the nuclear membrane pores conduct messenger RNAs from the cell nucleus into the cytosol. Nanopores have broad applications in molecule\//polymer detection and gene sequencing. In 1996,  Kasianowicz \cite{Kasianowicz1996} {\it et al.} first demonstrated experimentally that the $\alpha$-hemolysin protein nanopore is an effective single molecule sensor  using the ``resistive pulse'' technique. Due to advances in nanotechnology it is now possible to fabricate nanopores on various synthetic materials \cite{li_nat_mat03,storm_physRevE05,storm_nanolett05,dekker_nano_lett06,bayley_nanotechnology_2010,Garaj2010,Schneider2010,Merchant2010} . Synthetic nanopores have thus become the focus of much interest in recent years.
+
+When in contact with water, the membrane material on which the nanopore resides often carries surface charges due to surface reactions like hydration and dissociation. In an electrolyte solution environment, counter ions will accumulate near these charged surfaces. An external electric field is then able to drive this layer of charged fluid into motion. This electroosmotic flow, or EOF, is crucial to the motion of molecules\//polymers in the vicinity of the membrane. 
+
+Despite the fact that EOF parallel to an infinite plane or in a long tube is very well-understood, theoretical understanding of EOF in the vicinity of a nanopore is still lacking. The role of EOF in the transport of ions and polymers has not been thoroughly studied either. The scope of problems involving nanopores are such that the appropriate physical description of the fluid straddles the boundary between the molecular and continuum viewpoints. Due to the high computation cost of molecular dynamics (MD) simulations, the range of problems on nanopores that can be studied by this method is fairly limited. We use continuum simulation tools that can capture the multi-physics processes (electrostatics, ionic transport and Stokes flow) in a nanopore system. Our method therefore complements the MD approach and we believe makes up in terms of wider applicability the limitations that it has in modeling the lower ranges in nanopore size. 
+
+In the current work we present theoretical modeling of EOF in a nanopore. The theoretical modeling gives closed analytical expressions for the electroosmotic flow rate through a circular\//cylindrical nanopore under an applied electric field. Numerical tools are also developed in order to simulate EOF in a nanopore at the continuum level. The combination of theoretical and numerical modeling is also applied to studies such as eddies in a nanopore.
+
+\section{Background}
+\label{intro-bkg}
+\subsection{Nanopores}
+The biological cell is full of all sorts of nanopores. They control the trafficking of ions and molecules in and out of the cell and between intracellular organelles. Examples include ion channels that conduct ions across the cell membrane and viruses that smuggle their genomes into cells via pores they insert into the cell surface. There are enormous applications of nanopores in biological research, such as the single-ion channel that can measure the flow of ions through a single nanopore \cite{sakmann1983single}. In the 1990s, the idea of using nanopores as DNA sensors was proposed. Kasianowicz \cite{Kasianowicz1996} {\it et al.} demonstrated experimentally DNA translocation through an $\alpha$-hemolysin protein nanopore for the first time in 1996. $\alpha$-hemolysin is a protein that contains a transmembrane channel, with a width of 1.4 nm at its narrowest point. An applied voltage across the pore generates an ionic current. The pore has a small constriction so that 
+ only single stranded DNA (ssDNA) can be threaded through. As DNA is a highly charged polymer, it can be driven through the nanopore in a linear fashion by the electric field. One could detect the traversal of individual ssDNA molecules, as once the molecule enters the pore, the ionic current will be partially blocked. The presence of the ssDNA reduces the ionic current by an order of magnitude. This method of detecting and characterizing properties of single molecules has become known as the ``resistive pulse'' technique.
+
+One of the noteworthy results from these early experiments on alpha-hemolysin that generated much excitement was the fact that polyA and polyC homopolymers of RNA could be distinguished from the characteristics of the resistive pulse \cite{Akeson1999,Meller2000}. This suggested that nanopores could potentially be exploited to read the base sequence of an unknown DNA strand. Nanopore-based sequencing has the advantages of being label-free, amplification-free, requiring low-reagent volume and allowing long read lengths. It was however later realized that it was probably impossible to reach single base resolution based on the current signal alone. The reason is that translocation occurs at a very high rate, and the number of ions passing through the pore per DNA base or base pair is too small. The subtle differences of ionic current for different base pairs are likely to be overwhelmed by thermal fluctuation. Alternate approaches have evolved that use 
+ engineered biological nanopores in order to achieve more control on the translocation of DNA \cite{BayleyBook,gu1999stochastic,movileanu2000detecting,howorka2001sequence,benner2007sequence,cockroft2008single,lieberman2010processive}. In one such approach, an enzyme is attached to the lip of the pore that ``ratchets'' the ssDNA base-by-base as it enters the pore \cite{cockroft2008single}.
+
+As a working material, biological nanopores have some disadvantages such as fixed size and  limited stability of the supporting lipid membrane. Fabricated nanopores on solid-state membranes, on the other hand, have the advantages of high stability, changeable geometries, and adjustable surface properties. Several fabrication techniques have been developed by different groups. Conical nanopores can be built on PET films with the ion track-etching technique \cite{siwy2002fabrication}. The insulating film is exposed to radiation with swift heavy ions. The ions leave latent tracks in the film, which are subsequently etched into nanopores. The narrowest opening can be as small as a few nanometers, although the length of the nanopore  (the membrane thickness) is much larger. These pores typically have an opening angle, and the conical shape 
+has been demonstrated to exhibit ion current rectification similar to that of semiconductor 
+diodes \cite{Siwy2004,siwy2006,Vlassiouk2007,Vlassiouk2008}. This has potential applications as microfluidic circuit units.
+
+The first solid-state nanopore suitable for single DNA sensing was reported by the Golovchenko group at Harvard \cite{Li2001}. They developed the ion-beam sculpting technique to make nanopores of well-defined sizes in thin SiN membranes. It utilizes a dedicated ion beam to drill a tiny hole in the membrane. Feedback information collected by an ion detector at the opposite side of the membrane indicates the size of the pore. Other groups have developed techniques using electron-beam lithography and a focused electron-beam from a TEM \cite{Dekker2003}. The pore sizes can subsequently be fine tuned by wide-field TEM illumination. The technologies for making pores with true nanometer dimensions have advanced a lot in recent years. Nanopores as small as 1 nm can be fabricated with sub-nanometer precision. In the effort to make nanopores with sub-nanometer thickness, graphene sheets have been used for their remarkable mechanical, electrical and thermal properties. The most promising advantage is that the thickness of a single layer of graphene is comparable to the spacing between base pairs in ssDNA. In 2008, the Drndic group first fabricated a single nanopore and nanopore arrays on graphene films \cite{fischbein2008electron}. Later groups led by Golovchenko \cite{Garaj2010}, Dekker \cite{Schneider2010} and Drndic \cite{Merchant2010} all demonstrated dsDNA translocation through graphene nanopores. Simulations have also shown the potential of graphene nanopores as DNA sequencers with single-nucleotide resolution. 
+
+The development  of the ``DNA origami'' technique by Paul Rothemund in 2006 \cite{rothemund2006folding} ushered in another round of innovation in the development of precision engineered nanometer scale pores. For example, Bell {\it et al.} \cite{bell2011dna} demonstrated a hybrid system where a DNA origami pore could be reversibly mounted and detached onto a larger traditional solid state nano pore. Later Hern\'{a}ndez-Ainsa {\it et al.} \cite{hernandez2013dna} attached a small ssDNA “overhang” from the lip of such a pore to create a structure that exhibited chemical selectivity in much the same way that natural biological pores do. 
+ 
+\subsection{Electroosmotic flow at small scales}
+One of the main distinguishing features of nanopore systems responsible for many of the novel effects is that their geometric dimensions are small enough that electrokinetic effects are important. Using optical tweezers, Keyser {\it et al.} \cite{Keyser2006,VanDorp2009} was able to conduct direct force measurements on DNA in nanopores. DNA was attached to a polystyrene bead, which was trapped by an infrared laser. The DNA polymer could then be inserted into the nanopore using an applied voltage. The electric force acting on the DNA then tends to pull the bead away from the center of the laser trap. By measuring the displacement of the bead from its original position, the force on a DNA molecule in a solid-state nanopore can be directly measured. Subsequent theoretical analysis \cite{ghosal2006electrophoresis,ghosal2007effect,Ghosal2007} showed that the viscous force on the DNA polymer from the surrounding fluid is important compared to electrostatic forces from the electric field. DNA translocation and interaction in nanopores and nanocapillaries have been studied in \cite{laohakunakorn2013dna,thacker2012studying,ghosal2012capstan}.
+
+Other experiments have also demonstrated the importance of fluid flow in the transport of molecules\//polymers through nanopores. For example, it has been suggested that the average speed of DNA translocation 
+in wider nanopores \cite{storm_nanolett05} is not constant but has a weak power law dependence on the strand length. 
+The origin of this effect has been attributed to the hydrodynamic drag on the DNA coil outside the pore as the ``ball of twine'' unwinds in response to the tension in the DNA. A significant difficulty in nanopore-based DNA sequencing is that the DNA moves too fast. The velocity of the DNA can be slowed down, for instance, by increasing the viscosity of the fluid via addition of glycerol \cite{fologea2005slowing} or by modifying the substrate surface charge and hence the electroosmotic flow field around the translocating DNA \cite{ghosal2007effect}. 
+%\cite{ghosal PRL 2007 Effect of salt concentration on the electrophoretic speed of a polyelectrolyte through a nanopore}.% Mao: put in reference (Done)
+
+Electrokinetic flows have broad relevance beyond the context of nanopore-based DNA sequencing. Recently, Laohakunakorn {\it et al.} \cite{ghosal2013Nanoletter} measured an electroosmotic nanojet emerging from a glass nanocapillary. By mapping the vorticity field outside the pore entrance, they showed that the flow field sufficiently far away from the capillary tip can be described by the Landau-Squire solution for a point source of momentum. In the low Reynolds number limit of relevance here, this reduces to a Stokeslet localized in the vicinity of the pore. Another interesting application arises in the context of the current-voltage characteristic of perm selective membranes used e.g. in water desalination \cite{rubinstein2005electroconvective, kim2010direct}.
+%\cite{cite some review by Rubinstein or something else perhaps Udi's nice PRE paper}. 
+%Mao: put in reference here. (Done)
+Here an electroosmotic instability was shown to be the mechanism responsible for the phenomenon of ``overlimiting current'' through a perm-selective membrane. Due to the differential permeability to ions, when an electric field is applied 
+normal to a perm-selective surface, such as an electrode, a nanoporous membrane, or an array of nanochannels \cite{Vlassiouk2008a} ionic concentration gradients could form in the electrolyte solution adjacent to the membrane. It was Levich \cite{Levich} who first realized that such concentration polarization (CP) should result in saturation of the current density as the ionic species responsible for current flow across the membrane gets depleted in the CP layer. The resulting potential profile based on the electro-diffusive equilibrium becomes singular at the membrane. Ben {\it et al.} \cite{Ben2002} provided a correction to Levich's theory.  They were able to demonstrate that the ionic current does not saturate to a constant value, but rather the current continues to rise with voltage, allbeit with a small slope. 
+ This region is often referred to as the ``limiting resistance'' region. Yariv \cite{Yariv2009} further refined these calculations by dividing the region above the membrane into a neutral bulk, a concentration polarization layer (CPL) and a Debye layer. Using asymptotics, he was able to obtain theoretical formulae for both concentration and potential distributions. However, a rather mysterious region of ``over-limiting'' current was known to occur at even higher applied voltages where the slope of the current voltage characteristic abruptly increases. This was shown quite conclusively to be a consequence of the 
+ intrinsic instability of the CPL, known as the ``electroosmotic instability'' \cite{Rubinstein1979,rubinstein2005electroconvective,ZALTZMAN2007}. The resulting convective flow enhances ionic transport, increasing the current density beyond the diffusion limit. The microscopic eddies characteristic of this instability have been seen observed in experiments by many research groups, and have also been the focus of 
+ quite extensive theoretical efforts \cite{rubinstein2000electro,rubinstein2008direct,dydek2011overlimiting,deng2013overlimiting,chinaryan2014effect,Yossifon2008,yossifon2009nonlinear,Chang2011,kim2007concentration}. 
+
+A related electrokinetic effect that is intrinsically nonlinear is known as Induced Charge Electroosmosis (ICEO) \cite{murtsovkin96,Squires2004}. ICEO is observed when electric field lines penetrate an interface at a non-zero angle. The normal component of the electric field induces a Debye layer of ions (or alters the existing Debye layer due to 
+fixed charges) whereas the tangential component acts on the Debye layer driving a flow. 
+ICEO is responsible for a number of electrokinetic phenomena in microfluidics such as electrokinetic jets at microchannel corners, hydrodynamic interaction between polarizable particles and AC dielectrophoresis \cite{bazant2004induced,levitan2005experimental,basuray2007induced,bazant2009towards,schnitzer2012induced,schnitzer2014strong}. 
+
+% START HERE %%%
+
+\section{Governing Equations}
+The current work focuses on electroosmotic flow under DC field in nanopores and nanochannels.  The working environment for electrokinetically-driven fluidic devices is an ionic solution. At small scales, surfaces charges, either intrinsic or induced by the electric field, lead to accumulation of counter-ions within a layer of fluid near the surfaces, known as the electric double layer, or Debye layer. An external electric field is used to drive the non-electroneutrual fluid, while ion distributions are modified by the electric field and the electroosmotic flow at the same time. Electrostatics, transport of ion species and fluid flow are all coupled, making this a ``multiphysics'' problem.
+
+If steady state is assumed, the transport of the $i$th ionic species in electrolyte solution can be described by the Nernst-Planck equation \cite{landau1981course}
+\begin{equation}
+\nabla \cdot \left[ -D_i \nabla n^i  + \left(\mathbf{u} - \omega^i z_i e\nabla\phi \right)n^i  \right] = 0
+\label{eq:nernst-planck}
+\end{equation}
+where $n^i$ is the $i$th ionic concentration, $\mathbf{u}$ is the electroosmotic flow velocity and $\phi$ is the electric potential. The Nernst-Planck equation is essentially a statement about  conservation of the number of ions. The ion flux consists of diffusion (with diffusivity $D_i$), convection in flow field $\mathbf{u}$ and convection in electric field $\mathbf{E} = -\nabla \phi$. Here $e$ is the magnitude of the electronic charge and $z_i$ is the valence of the $i$-th ionic species.  Each ionic species is characterized by its ``mobility’’ $\omega_i$: the velocity acquired by the ion in response to a unit applied force.   By the Einstein relation, $\omega^i=\frac{D_i}{k_B T}$ where $k_B$ is the Boltzmann constant and $T$ is the electrolyte temperature. Isothermal conditions are assumed here, although in some problems, Joule heating may have a significant effect \cite{sridharan2011joule}. 
+
+The electric potential $\phi$ can be determined using the Poisson equation.
+\begin{equation}
+\epsilon \nabla^2 \phi = -e\left( \sum_i z_i n^i \right) 
+\label{eq:poisson}
+\end{equation} 
+Here $\epsilon$ is the permittivity of the electrolyte solution, often taken as the permittivity of water, or $\epsilon = 80\epsilon_0$, $\epsilon_0$ being the permittivity of vacuum. The net space charge density is given as $\rho_e = e\sum_i z_i n^i$.
+
+On the other hand, the electric potential within solid regions immersed in electrolyte solution is described by the Laplace equation, namely
+\begin{equation}
+\epsilon_s \nabla^2 \phi = 0
+\label{eq:laplace}
+\end{equation}
+Possible solid regions could be dielectric membranes, colloidal particles and capillary walls. In contrast to Equation \ref{eq:nernst-planck}, the net space charge within solid regions is zero.
+
+The potentials $\phi$ within the electrolyte solution and solid regions are related by the requirement of continuity at the fluid-solid interface, and that the jump of the normal electric displacement is related to the intrinsic surface charge density at the interface.
+
+The electroosmotic flow generated by the electric field acting on the space charge cloud is described by the Stokes equation.
+\begin{equation}
+-\nabla p + \mu\nabla^2\mathbf{u} - e\left( \sum_i z_i n^i \right) \nabla\phi = 0
+\label{eq:stokes}
+\end{equation}
+where $p$ is the pressure. At micro and nanoscales, the Reynolds number is essentially 0. The inertia term can be neglected. The continuity equation is given by
+\begin{equation}
+\nabla \cdot \mathbf{u} = 0
+\label{eq:continuity}
+\end{equation}
+
+Equation \ref{eq:nernst-planck}, \ref{eq:poisson}, \ref{eq:stokes} and \ref{eq:continuity} are known as the Poisson-Nernst-Planck-Stokes (PNP-Stokes) equations.
+
+%\subsection{Dimensionless form}
+%The dimensionless form of the PNP-Stokes system of equations are presented in order to identify the principle dimensionless parameters that govern the physical behavior. We limit our discussion to an electrolyte of 2 ionic species.
+%
+%We use the bulk concentration $n_\infty$ as the scale for $n^i$. Electric potential is scaled with $k_BT/e$. The length scale is chosen to be $R$. $R$ is the length scale of the micro or nanofluidic system. It could be the radius of the nanopore, or width\//diameter of the nanochannel. Normalizing $\mathbf{u}$ with $U_0=D/R$ and pressure $p$ with $\mu U_0/R^2$, we get the dimensionless system of equations given by the following:
+%
+%\begin{equation}
+%-\eta^2 \nabla^{*2} \phi^* = \frac{\left( \sum_{i=1}^2 z_i n^{i,*} \right)}{2}
+%\end{equation}
+%\begin{equation}
+%\nabla^* \cdot (-\nabla^*n^{i,*} - z_i n^{i,*}\nabla^* \phi^* + \frac{D}{D_i} u^*n^{i,*})=0, \qquad i=1,2
+%\end{equation}
+%\begin{equation}
+%\nabla^* \cdot \mathbf{u}^* =0
+%\end{equation}
+%\begin{equation}
+%-\nabla^* p^* + \nabla^{*2} \mathbf{u}^* - \xi \left( \sum_{i=1}^2 z_i n^{i,*} \right) \nabla^*\phi^* = 0
+%\end{equation}
+%Two dimensionless parameters emerge, namely $\eta=\frac{\lambda_D}{R}$ and $\xi=\frac{n_\infty k_BT R^2}{D \mu}$. All the dimensionless variables and derivatives have the superscript $*$. 
+%
+%$\lambda_D$, or the Debye length, is defined as
+%\begin{equation}
+%\lambda_D=\sqrt{\frac{\epsilon k_BT}{}}
+%\end{equation}. 
+%The Debye length is the distance from the charged surface within the electrolyte, at which the potential energy of an ion is of the same order as its kinetic energy due to thermal motion. Due to charge cloud screening, at a distance more than one Debye length from the surface, the effect of surface charges only have a very weak effect on the fluid and ions within. If $\lambda_D$ is small compared to $R$, or $\eta \ll 1$, most part of the fluid is electroneutral, except within the double layer. On the other hand, if $\eta$ is close to 1, the electric double layer will occupy a significant portion of the system, and the effect of overlapping double layer will be important.
+%
+%The second dimensionless parameter is
+%\begin{equation}
+%\xi=\frac{c_0k_B T R^2}{D_1 \mu}=\frac{c_0 R^2}{\mu u_{m}}
+%\end{equation}
+%where $u_{m}$ is the characteristic mobility of ions. Multiplying by the factor $eE_0$ in both the numerator and denominator ($E_0$ is an external electric field of unit strength), we get:
+%\begin{equation}
+%\xi=\frac{c_0eR^2E_0/\mu}{u_{m}eE_0}
+%\end{equation}
+%in which $u_{m}e E_0$ is the velocity an ion acquires under $E_0$, or the electrophoretic velocity. $c_0eR^2E_0/\mu$ also has a dimension of velocity and can be interpreted as the velocity the fluid acquires under $E_0$ because of the space charge density it carries, or the electroosmotic velocity (since $c_0 e R^3 E_0$ is the force exerted on a spherical fluid particle of radius $R$. Divided by $6\pi R \mu$ is the velocity of that particle, due to Stokes\'{} law). Thus $\xi$ is a ratio between the two velocities representing electrophoretic and electroosmotic effects. It could also be related to the electric Reynolds number $Re_E^{-1}$, defined as the ratio of the time scale of charge convection by flow to a charge relaxation time set by Ohmic conduction\cite{feng1999electrohydrodynamic}.
+
+%%%% START HERE %%%%%%%%
+
+\subsection{Fundamental Concepts of Electrokinetics}
+Under certain conditions, the PNP-Stokes system of equations have analytical solutions. In the absence of external electric fields or fluid flow ($\mathbf{u}=0$) the concentration of ions is uniform; $n^i = n_\infty^i$ for the $i$-th species of ions. Since the bulk solution is charge neutral, clearly $\sum_{i} n_\infty^i z_i = 0$. However, if the substrate is charged, the concentrations $n^i$ are non-uniform and so is the distribution of potential $\phi_0$ in the electrolyte.  
+
+
+
+% the solid substrate has an electric potential due to the surface charges, known 
+%as the $\zeta-$potential \cite{kirby2004zeta,kirby2004zeta2}. Assume a uniform potential $\zeta$, and the equilibrium electric potential distribution in the electrolyte solution is $\phi_0$. 
+
+
+The steady state solution of Equation \ref{eq:nernst-planck} under conditions of zero ionic current is the 
+Boltzmann distribution:
+\begin{equation}
+n^i = n_\infty^i \exp \left( -\frac{z_i e \phi_0}{k_BT} \right)
+\end{equation}
+Here $n_\infty^i$ is the bulk ionic concentration far from the charged surfaces, where $\phi_0=0$.
+If the Boltzmann distribution is substituted into Equation \ref{eq:poisson}, we get the Poisson-Boltzmann equation for determining the electric potential $\phi_0$:
+\begin{equation}
+\epsilon \nabla^2\phi_0 = -  \sum_i e z_i n_\infty^i \exp \left( -\frac{z_i e \phi_0}{k_BT} \right) 
+\label{eq:poisson-boltzmann}
+\end{equation}
+
+The description of the electric double layer using the above approach is known as the Gouy-Chapman model \cite{ghosal2006electrokinetic}. 
+In the weak field limit, a.k.a. the Debye-H\"{u}ckel limit, or $|\zeta|\ll k_BT/e\approx 25$ mV, Poisson-Boltzmann equation can be linearized by using the approximation $\exp (x ) \approx 1 + x$ when $x$ is small and the condition of electroneutrality of the bulk solution. We then the Debye-H\"{u}ckel equation 
+\begin{equation}
+\epsilon \nabla^2\phi_0 = \frac{\sum_i z_i^2 e^2 n_\infty^i}{k_BT} \phi_0
+\end{equation}
+or
+\begin{equation} 
+\nabla^2\phi_0 - \kappa^2 \phi_0 = 0
+\end{equation}
+where $\kappa^{-1}$ is known as the Debye length
+\begin{equation}
+\kappa^{-1}=\lambda_D=\left(\frac{\epsilon k_BT}{\sum_i e^2 z_i^2n_\infty^i}\right)^{1/2},
+\end{equation}
+Closed form analytical solutions for the linearized Poisson-Boltzmann equations are known in simple geometries e.g. when the equipotential surfaces are planar, spherical or cylindrical \cite{ghosal2006electrokinetic,ghosal2010mathematical}. 
+
+In the presence of external fields and fluid flow the equilibrium Gouy-Chapman model is generally no longer applicable and one must proceed from the full electrokinetic equations presented earlier. However, if the external field and fluid velocity are both along the iso-surfaces of the charge density $\rho_e$ then the presence of the flow or the imposed field does not alter the charge density distribution which may still be obtained from the Gouy-Chapman model. This is the case for example when an electric field is applied along the axis of a uniformly charged cylinder or if an electric field is applied parallel to a charged planar surface. It is also true in the case of a surface of arbitrary shape but where the Debye layer is much thinner than the local radius of curvature (so that the geometry is essentially planar) and the electric field lines are parallel to the surface. 
+It then follows that the flow 
+velocity at any point is 
+\begin{equation}
+\mathbf{u} = \frac{\epsilon \mathbf{E}}{\mu}\left(\phi_0 - \zeta\right)
+\label{eq:classicu}
+\end{equation}
+which expresses the flow field $\mathbf{u}$ in terms of the equilibrium potential $\phi_0$ and the applied field 
+$\mathbf{E}$. The quantity 
+$\zeta$ is the potential at the surface of the solid and is called the ``zeta'' potential\footnote{since the potential 
+changes very rapidly close to the surface the potential ``at'' the surface becomes somewhat ambiguous. Technically,
+the zeta potential is defined as the potential at the ``slip plane'': an imaginary 
+surface separating the ``Stern layer''  of adsorbed counterions from the ``diffuse layer'' of mobile ions.}.
+When the double layer is thin compared to the characteristic geometric length scales of the system, $\phi_0$ is uniform in the bulk region of the electrolyte and changes rapidly within the thin double layer. This is the case for example in 
+microfluidic channels, where the radius of the channel is around 10-100 $\mu$m, while the Debye length $\lambda_D$ $\approx$ 1-10 nm. Hence, from Equation \ref{eq:classicu}, the velocity is uniform in the bulk, and drops rapidly to zero at the solid wall within a small distance of the order of $\lambda_D$. The velocity difference between the wall and the velocity at the point right above the (infinitely thin) double layer is
+\begin{equation}
+\Delta \mathbf{u} = -\frac{\epsilon \mathbf{E} \zeta}{\mu}
+\label{eq:HSslip}
+\end{equation}
+This is known as the ``Helmholtz-Smoluchowski'' slip velocity \cite{Helmholtz,Smoluchowski1924}. A formal asymptotic derivation of the result in terms of the small parameter $\lambda_D/a_0$ ($a_0$ being a characteristic length) is presented by Anderson \cite{anderson1985effect}. The ``slug'' velocity profile in the bulk is the basis for many microfluidic applications, such as capillary electrophoresis \cite{ghosal2006electrokinetic} where a uniform flow is critical in order to avoid Taylor dispersion.
+
+\section{Thesis Outline}
+The current work focuses on electroosmotic flow in a nanopore system. In Chapter 2, an analytical solution is presented for electroosmotic flow through a zero-thickness nanopore under the weak field approximation. The reciprocal theorem for Stokes flow is utilized to calculate the flow rate through the nanopore under an applied voltage bias. The flow rate can be presented in closed form as an integral for a circular nanopore, and the resulting integral is computed by quadrature. This chapter is based on the paper \cite{mao2014} by Mao, Sherwood and Ghosal. In Chapter 3, the zero-thickness solution is patched with the solution of electroosmotic flow in a cylindrical tube to yield a formula for the flow 
+through a nanopore in a membrane of finite thickness. Comparison with the full numerical solution of the PNP-Stokes 
+equation validates the theory except when the Debye layer is thick compared to the pore radius. It is then shown that 
+the discrepancy is due to a reduction in the ``effective charge'' of the pore as some of the counterion ions 
+from the pore ``spill'' outside the pore when the Debye length is long. When this effect is accounted for, the 
+agreement between theory and simulation is restored. This chapter is based on the paper \cite{sherwood2014} by Sherwood, Mao and Ghosal. In Chapter 4, the system of an uncharged finite-thickness nanopore is considered taking into account the effect of a finite dielectric ratio between solid and liquid leading to an ICEO effect. The flow induced in this system under an applied electric field is studied both theoretically and numerically. The results show corner jets and vortical flow structures in the nanopore. This chapter is based on the paper \cite{sherwood2014electrically} by Sherwood, Mao and Ghosal. In Chapter \ref{chpt:numerical}, numerical methods of solving the PNP-Stokes system are discussed. Summary and conclusions are presented in Chapter \ref{chpt:conclusion}. 

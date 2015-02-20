@@ -1,0 +1,199 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% nuthesis-template.tex - Miguel A, Lerma - 5/21/2012
+%                         mlerma@math.northwestern.edu
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% DISCLAIMER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% In spite of the effort to accommodate this template and the nuthesis
+% class to the official requirements of the university to write a 
+% Ph.D. dissertation, it is not possible to guarantee that it will 
+% always work, and the author of the dissertation remains responsible
+% for checking that such requirements are actually fulfilled by 
+% his/her final work.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt]{nuthesis}	% The nuthesis class is based on 
+				% amsbook.cls.			
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{epigraph}
+\usepackage{subcaption}
+\usepackage{amssymb,amsmath,amsbsy}
+\usepackage{multirow}
+\usepackage{subeqnarray}
+\usepackage{psfrag}
+\usepackage{color}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\usepackage{listings}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+  backgroundcolor=\color{lbcolor},
+  tabsize=2,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\small\sf,
+%  identifierstyle=\color{magenta},
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{codegreen},
+  stringstyle=\color{red}
+}
+% no hyperref on toc
+\makeatletter
+\let\Hy@linktoc\Hy@linktoc@none
+\makeatother
+%\usepackage[style=authoryear,backend=bibtex]{biblatex}
+%\bibliography{references}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DATA OF AUTHOR AND DISSERTATION %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Mao Mao}
+
+\title{Electroosmotic flow in a nanopore}
+
+\degree{DOCTOR OF PHILOSOPHY}  % Default: DOCTOR OF PHILOSOPHY
+
+\field{Mechanical Engineering}            % Default: Mathematics
+
+\graduationmonth{March}         % The default is June or December
+                                % depending on current date.
+\graduationyear{2015}          % Default: current year.
+
+%\includeonly{}
+				% Use \includeonly to select the 
+				% chapters to include if you are 
+				% using the \include command below.
+				% This way you can latex only a the 
+				% part you are working on, which 
+				% is faster than latexing the entire 
+				% thesis. 
+
+
+\begin{document}
+%	
+%	THE BODY OF YOUR THESIS STARTS HERE
+%
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Some initial stuff %
+%%%%%%%%%%%%%%%%%%%%%%
+
+\frontmatter		% Preliminary pages start here.
+
+\maketitle		% Produces the title page.
+
+\copyrightpage		% Creates the copyright page.
+
+\abstract		% Abstract.
+A nanopore is simply an orifice in an impermeable membrane separating two reservoirs filled with an electrolyte. The prefix `nano' usually signifies that the diameter of the orifice is in the range of one to a few hundred nanometers. A nanopore is perhaps one of the simplest ``molecular machines'' that determine cellular function. Protein nanopores embedded in lipid membranes mediate many activities of living cells. Examples include signal transduction in nerve cells, the controlled transport of water in and out of cells, movement of macromolecules such as DNA, RNA and proteins between the cytoplasm and various intracellular bodies (nucleus, mitochondria) etc. Recently, ``biomimetic'' nanopores have been utilized in single molecule detection and manipulation. One of the technologies being actively pursued in this area is ultra-rapid DNA sequencing using nanopores. Furthermore, the properties of single nanopores underlie the behavior of membranes. Membrane science is a subject unto itself and has applications in living systems (e.g. kidney dialysis membranes) as well as various technologies ranging from water purification to fuel cells. 
+
+ 
+The walls of the nanopore as well as the surface of the supporting membrane under most circumstances have a static charge due to adsorption and dissociation of chemical groups in the presence of the surrounding electrolyte. The copious supply of ions of either sign in the surrounding electrolyte thus creates a thin ``Debye Layer'' (DL) or ``Electric Double Layer'' (EDL) of mobile counterions that shield the free charges on the solid fluid interface. Electrical forces originating in this EDL determine fluid flow through the pore when pressure or voltage differences are applied across it. The resulting flow field is very important in determining the transport of small molecules or polymers through the pore, especially when the particles and polymers are uncharged. This dissertation addresses the problem of electroosmotic pumping of fluid through a nanopore that traverses a charged, dielectric membrane. The continuum equations of hydrodynamics and electrostatics are presumed to apply. Such an assumption would be reasonable for pores greater than about $5$ nm in size which is the case for most synthetic membranes. On the other hand, nanopores formed by proteins on lipid membranes are much smaller - a few water molecules across. Our basic approach is not likely to be accurate in such cases except perhaps for providing qualitative answers.
+
+The strength and structure of the flow depends on several parameters including the geometry of the nanopore, external voltage, concentration of the electrolyte solution and the properties of the membrane material, such as polarity and surface charge density. Under the weak field assumption, perturbation methods can be utilized for theoretical modeling of the flow field in the linear regime. The reciprocal theorem gives the flow rate generated by an applied voltage in the form of an integral over the fluid domain. The integral involves (1) the equilibrium double layer charge density ($\rho_{0}$)  (2) the flow field in the given geometry with no charge effects but a unit applied pressure drop ($\mathbf{G}$) (3) the harmonic function corresponding to the solution of the Ohmic problem where the electrolyte is regarded as a homogeneous conductor ($\mathbf{\chi}$).  For a circular hole in a membrane of zero thickness (1)-(3) are known, and therefore, the integral may be evaluated by quadrature. When the membrane thickness is non-zero, the functions (1)-(3) do not have known analytical forms. An approximate evaluation of the flow rate is however possible by ``patching'' the zero-thickness solution with the analytical solution of electroosmotic flow in a cylindrical channel and exploiting the constraints of continuity of current and fluid flux. The approach works well except when the EDL thickness is large compared to the pore size or membrane thickness. The cause of the failure is attributed to the ``spilling'' of charge from the pore and a method for correcting the theory to include its effect is demonstrated. When the intrinsic surface charges on the membrane are neutralized, eddies with length scale of a few nanometers could arise within the pore due to induced charge electroosmosis. The flow strength in this case is found to be proportional to square of the applied voltage. The shape of the eddies is found to be dependent on the geometry of the pore.
+
+Numerical solvers to solve the full governing system of equations are developed by utilizing the finite volume solver
+modules available in the ``OpenFOAM'' software package. The solvers are able to compute the coupled electrostatics, ionic transport and Stokes flow equations. Numerical results agree with theoretical models in the corresponding parameter regimes.
+
+\acknowledgements	% Acknowledgements (optional).
+
+I would like to express my deepest gratitude to my advisor Prof. Sandip Ghosal. He has been a tremendous mentor for me during my years at Northwestern University. I have learned from him a great deal, not only about fluid mechanics, but also about commitment to scientific research. Working with him has always been a pleasant and rewarding experience. His support and advice on both research as well as my career has been invaluable. So with all my heart, thank you Professor, for everything!
+
+I would also like to thank Dr. John Sherwood from DAMTP at the University of Cambridge. The material presented in this dissertation would be impossible without his extremely important contributions. It was a great honor collaborating with a great mathematician like him. I also want to thank Dr. Guohui Hu from Shanghai University, who introduced the topic of nanopores to me in 2011. The research we did together on nanopores at the beginning of my PhD study pointed me in the right path.
+
+I would like to thank my committee members, Prof. Seth Lichter, Prof. Malcolm MacIver and Prof. Micheal Miksis, for taking the time to review and comment on my thesis. I also want to thank Prof. Neelesh Patankar for helpful discussion on computational fluid dynamics, and Prof. Ulrich Keyser for hospitality during my visit to the Cavendish Laboratory at Cambridge.
+
+Most importantly, I would like to thank my dearest girlfriend Anna, for being with me through this tough journey, for sharing all my happy and sad moments, and for loving and unconditionally supporting me during the past 3 years. I am also grateful to my family who encouraged and supported me in pursuing my PhD studies.
+
+A special thanks to the guys in the fluids lab, Amneet, Namu, Paul, Rahul, Tayil, Tom, Walter and Zhen, and my good friends Hao, Hongyi, Jieqi, Shi, Shu and Wenchang.
+
+I have been extremely fortunate to have all the help and support I have had during the past 5 years. I am grateful to everyone who helped me along the road, and I wish I were able to name each one of them but this would take too long as there were many! 
+
+%\preface		% Preface (optional).
+%
+%This is the preface.
+
+%% A few more optional pages (uncomment if needed)
+%
+%\listofabbreviations 
+%
+%This is the list of abbreviations (optional).
+%
+%\glossary
+%
+%This is the glossary (optional).
+%
+%\nomenclature
+%
+%This is the nomenclature (optional).
+%
+%% Note that the dedication text must be passed as an argument
+%% of the \dedication command
+%\dedication{This is the dedication (optional).}
+%
+
+\clearpage\phantomsection % needed for the hyperlinks to work correctly
+\tableofcontents	% Table of Contents will be automatically
+			% generated and placed here.
+
+\clearpage\phantomsection % needed for the hyperlinks to work correctly
+\listoftables		% List of Tables and List of Figures will be placed
+
+\clearpage\phantomsection % needed for the hyperlinks to work correctly
+\listoffigures		% here, if applicable (optional).
+
+
+
+\mainmatter             % Actual text starts here.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Actual text starts here %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Alternatively, you may write the chapters in separate
+% files, say chap1.tex, chap2.tex, etc., and include them 
+% with commands:
+
+\include{introduction/introductionA}
+\include{zero_thickness/zero_thickness} 
+\include{finite_thickness/finite_thickness}
+\include{eddies/eddy8}
+\include{openfoam/openfoamA}
+\include{conclusion/conclusionA}
+
+% The command \includeonly above allows to include a selected 
+% set of chapters only.
+
+% (The following suggested by Francisco Iacobelli - 5/11/2010)
+% In case, you want to use BibTeX, you should replace (or comment)
+% the bibliography environment.
+% Instead uncomment the following 3 lines and replace <bib file>
+% with your .bib file:
+%\renewcommand\refname{\begin{centering}References\end{centering}}
+\bibliography{references}
+\bibliographystyle{unsrt} %or another suitable style.
+
+%\appendix		% Appendix begins here (optional).
+%
+%%\appendices	        % If more than one appendix chapters,
+%				% use appendices instead of appendix
+%
+%\chapter{Title of Appendix}	% First appendix chapter, i.e., Appendix A.
+%
+%\section{First section of Appendix}	% This is appendix section 1.
+%
+%This is the Appendix.
+%
+\end{document}
+
